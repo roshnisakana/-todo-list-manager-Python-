@@ -1,0 +1,143 @@
+<svg viewBox="0 0 1150 1080" xmlns="http://www.w3.org/2000/svg" font-family="Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#333"/>
+    </marker>
+  </defs>
+
+  <style>
+    .box { fill: #eef4ff; stroke: #3b5bdb; stroke-width: 2; }
+    .decision { fill: #fff7e6; stroke: #d9822b; stroke-width: 2; }
+    .terminal { fill: #e6fcf5; stroke: #0ca678; stroke-width: 2; }
+    .action { fill: #f3f0ff; stroke: #7048e8; stroke-width: 2; }
+    .label { font-size: 15px; fill: #1a1a1a; text-anchor: middle; }
+    .sublabel { font-size: 13px; fill: #495057; text-anchor: start; }
+    .edge { stroke: #333; stroke-width: 1.5; fill: none; marker-end: url(#arrow); }
+    .edgelabel { font-size: 12px; fill: #333; }
+  </style>
+
+  <!-- Start -->
+  <rect x="495" y="10" width="160" height="45" rx="22" class="terminal"/>
+  <text x="575" y="38" class="label">START</text>
+
+  <!-- Load tasks -->
+  <rect x="455" y="85" width="240" height="50" rx="8" class="action"/>
+  <text x="575" y="115" class="label">Load tasks.json into memory</text>
+
+  <!-- Loop marker -->
+  <rect x="445" y="165" width="260" height="50" rx="8" class="box"/>
+  <text x="575" y="196" class="label">Show menu (options 1-7)</text>
+
+  <!-- Decision: choice -->
+  <polygon points="575,240 690,300 575,360 460,300" class="decision"/>
+  <text x="575" y="296" class="label">User's</text>
+  <text x="575" y="313" class="label">choice?</text>
+
+  <!-- ===== Column centers: View=90  Add=340  CR=650  Exit=970 ===== -->
+
+  <!-- Branch: View (col center 90) -->
+  <rect x="10" y="410" width="180" height="55" rx="8" class="box"/>
+  <text x="100" y="433" class="label">View all / pending /</text>
+  <text x="100" y="450" class="label">completed tasks</text>
+
+  <!-- Branch: Add (col center 340) -->
+  <rect x="250" y="410" width="180" height="55" rx="8" class="box"/>
+  <text x="340" y="433" class="label">Add: prompt for</text>
+  <text x="340" y="450" class="label">description</text>
+
+  <!-- Decision: valid desc -->
+  <polygon points="340,495 420,540 340,585 260,540" class="decision"/>
+  <text x="340" y="536" class="label">Empty?</text>
+
+  <rect x="140" y="620" width="150" height="45" rx="8" class="action"/>
+  <text x="215" y="648" class="label">Show error</text>
+
+  <rect x="390" y="620" width="180" height="45" rx="8" class="action"/>
+  <text x="480" y="648" class="label">Create Task, save</text>
+
+  <!-- Branch: Complete/Remove (col center 650) -->
+  <rect x="560" y="410" width="180" height="55" rx="8" class="box"/>
+  <text x="650" y="433" class="label">Complete / Remove:</text>
+  <text x="650" y="450" class="label">prompt for task ID</text>
+
+  <!-- Decision: valid ID -->
+  <polygon points="650,495 735,545 650,595 565,545" class="decision"/>
+  <text x="650" y="541" class="label">Valid &amp;</text>
+  <text x="650" y="557" class="label">found?</text>
+
+  <rect x="620" y="660" width="150" height="45" rx="8" class="action"/>
+  <text x="695" y="688" class="label">Show error</text>
+
+  <rect x="800" y="660" width="200" height="45" rx="8" class="action"/>
+  <text x="900" y="688" class="label">Update task, save</text>
+
+  <!-- Branch: Exit (col center 970) -->
+  <rect x="880" y="410" width="160" height="55" rx="8" class="box"/>
+  <text x="960" y="433" class="label">Exit: print</text>
+  <text x="960" y="450" class="label">goodbye message</text>
+
+  <rect x="880" y="500" width="160" height="45" rx="22" class="terminal"/>
+  <text x="960" y="528" class="label">END</text>
+
+  <!-- Return to loop -->
+  <rect x="455" y="900" width="240" height="45" rx="8" class="box"/>
+  <text x="575" y="928" class="label">Return to menu (loop)</text>
+
+  <!-- ===== EDGES: main spine ===== -->
+  <path class="edge" d="M575,55 L575,85"/>
+  <path class="edge" d="M575,135 L575,165"/>
+  <path class="edge" d="M575,215 L575,240"/>
+
+  <!-- decision to branches -->
+  <path class="edge" d="M490,290 C300,340 180,370 100,410"/>
+  <text x="270" y="355" class="edgelabel">1 / 2 / 3</text>
+
+  <path class="edge" d="M530,330 C460,360 400,385 350,410"/>
+  <text x="420" y="380" class="edgelabel">4</text>
+
+  <path class="edge" d="M620,330 C640,360 645,385 648,410"/>
+  <text x="655" y="380" class="edgelabel">5 / 6</text>
+
+  <path class="edge" d="M660,290 C800,340 900,370 955,410"/>
+  <text x="850" y="355" class="edgelabel">7</text>
+
+  <!-- Add branch internal -->
+  <path class="edge" d="M340,465 L340,495"/>
+  <path class="edge" d="M300,560 C270,585 250,600 225,620"/>
+  <text x="230" y="595" class="edgelabel">yes</text>
+  <path class="edge" d="M385,560 C415,585 440,600 460,620"/>
+  <text x="425" y="595" class="edgelabel">no</text>
+
+  <!-- Complete/Remove branch internal -->
+  <path class="edge" d="M650,465 L650,495"/>
+  <path class="edge" d="M625,580 C670,610 690,635 695,660"/>
+  <text x="640" y="630" class="edgelabel">no</text>
+  <path class="edge" d="M690,570 C780,610 850,635 890,660"/>
+  <text x="790" y="630" class="edgelabel">yes</text>
+
+  <!-- exit branch internal -->
+  <path class="edge" d="M960,465 L960,500"/>
+
+  <!-- back to loop (all outcomes converge) -->
+  <path class="edge" d="M100,465 C120,650 350,850 460,905"/>
+  <path class="edge" d="M215,665 C260,760 400,860 470,905"/>
+  <path class="edge" d="M480,665 C500,750 530,840 555,900"/>
+  <path class="edge" d="M695,705 C650,780 610,850 590,900"/>
+  <path class="edge" d="M900,705 C800,800 680,860 610,905"/>
+
+  <!-- loop-back arrow to menu box -->
+  <path class="edge" d="M455,922 C150,900 120,300 445,190" stroke-dasharray="5,3"/>
+
+  <!-- Legend -->
+  <rect x="20" y="960" width="18" height="18" class="box"/>
+  <text x="48" y="975" class="sublabel">Menu / display step</text>
+
+  <rect x="20" y="990" width="18" height="18" class="decision"/>
+  <text x="48" y="1005" class="sublabel">Decision point</text>
+
+  <rect x="260" y="960" width="18" height="18" class="action"/>
+  <text x="288" y="975" class="sublabel">Data action (validate / save / error)</text>
+
+  <rect x="260" y="990" width="18" height="18" class="terminal"/>
+  <text x="288" y="1005" class="sublabel">Start / End of program</text>
+</svg>
